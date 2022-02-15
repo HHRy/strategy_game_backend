@@ -20,3 +20,9 @@ Style/Documentation:
 
 Naming/MethodParameterName:
   Enabled: false
+
+Style/CommentedKeyword:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 100

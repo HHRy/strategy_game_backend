@@ -14,10 +14,10 @@ games to be actually playable.
 Planned supported features:
 
   - Different unit types (land, air, and sea)
-  - Different building types (land, sea)
+  - Different building types
   - Different factions
   - Faction specific units
-  - Maps with Resources
+  - Maps with Resources and obstacles and basic terrain
   - Bot v Player
   - Bot v Bot
   - Player v Player
@@ -25,19 +25,48 @@ Planned supported features:
   - Technology tree(s) (maybe)
 
 The initial map format and everything else will be assuming 2 dimentions, like
-the original C&C games. Maybe once that's figured out, I'll make a 3D version.
+the original C&C games.
 
-In the `examples` directory, there are files in `rtsmap` and `rtsunit` formats
-which the engine will load to build the game world. They describe the important
-parts of the items for the engine to track things, so don't include any
-information about rendering or any assets.
+In the `examples` directory, there are files in `rtsmap`, `rtsbuilding`, and
+`rtsunit` formats which the engine will load to build the game world.
+They describe the important parts of the items for the engine to track things,
+so don't include any information about rendering or any assets.
 
 This is totally a toy project for fun. If you come accross it, feel free to help
 out. It'll be released as a gem when I think it's done enough to be useful.
 
-## Usage
+The idea is that there will be two layers to a map, one for ground / sea based
+units, and one for air based units. Their positions will be tracked, and overall
+obstacles and areas where there is sea, obstacles, and resources will be defined.
 
-TODO: Not sure yet
+I'm making up the format for the Map as I go along, while I work out how to process
+and represent it.
+
+Pathfinding is done using [Quentin18/pathfinding.rb][1] for now, and concurrent
+tasks are being handled by [ruby-concurrency/concurrent-ruby][2].
+
+Map coordinates assume that 0,0 is the top left. Although I guess that's immaterial
+since this isn't going to really render a map.
+
+Movement rules are going to be simple:
+
+  - No two units of the same type can occupy the same location
+  - No unit can enter a "obstacle" area
+  - Only sea and air units can travel over water
+  - Sea units can't travel on land
+  - Units can't occupy the same space as buildings.
+
+Building rules are likewise going to be simple:
+
+  - Nothing can be built on "resource" or "obstacle" areas
+  - Buildings can only be built on land
+
+Combat will work as:
+
+  - Each weapon has a range, rate of fire, and damage
+  - Enemy units within rage of a given unit will be fired upon
+  - There won't be any splash damage just now
+
 
 ## Development
 
@@ -56,3 +85,6 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the StrategyGameBackend project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/strategy_game_backend/blob/master/CODE_OF_CONDUCT.md).
+
+[1]: https://github.com/Quentin18/pathfinding.rb
+[2]: https://github.com/ruby-concurrency/concurrent-ruby

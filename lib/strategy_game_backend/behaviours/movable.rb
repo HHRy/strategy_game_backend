@@ -45,10 +45,10 @@ module StrategyGameBackend
       private
 
       # Checks the map to see if the provided coordinates are within its
-      # bounds. TODO: This should be handled with the other map stuff.
+      # bounds.
       def coordinates_within_map?(x, y)
-        # x < map.width && y < map.height &&
-        x >= 0 && y >= 0
+        x >= 0 && y >= 0 &&
+          StrategyGameBackend::Map.fetch_for_game.within?(x, y)
       end
     end
   end
