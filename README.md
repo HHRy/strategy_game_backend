@@ -1,6 +1,6 @@
 # StrategyGameBackend
 
-[![CircleCI](https://circleci.com/gh/hhry/strategy_game_backend.svg?style=svg)](https://circleci.com/gh/hhry/strategy_game_backend)
+[![CircleCI](https://circleci.com/gh/HHRy/strategy_game_backend/tree/main.svg?style=svg)](https://circleci.com/gh/HHRy/strategy_game_backend/tree/main)
 
 This is an as-yet un-named toy engine to allow you to play C&C style RTS
 games with bots or other players.
@@ -27,10 +27,10 @@ Planned supported features:
 The initial map format and everything else will be assuming 2 dimentions, like
 the original C&C games. Maybe once that's figured out, I'll make a 3D version.
 
-In the `examples` directory, there are files in `rtsmap` and `rtsunit` formats 
+In the `examples` directory, there are files in `rtsmap` and `rtsunit` formats
 which the engine will load to build the game world. They describe the important
 parts of the items for the engine to track things, so don't include any
-information about rendering or any assets. 
+information about rendering or any assets.
 
 This is totally a toy project for fun. If you come accross it, feel free to help
 out. It'll be released as a gem when I think it's done enough to be useful.
