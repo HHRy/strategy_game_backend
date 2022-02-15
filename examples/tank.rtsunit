@@ -1,0 +1,60 @@
+{
+  "name": {
+    "en": "Tank",
+    "ja": "タンク"
+  },
+  "version": 1,
+  "faction": "default",
+  "type": "trackedVehicle",
+  "subType": "tank",
+  "speed": 4,
+  "techLevel": 0,
+  "minTechLevel": 0,
+  "primaryHealth": 100,
+  "secondaryHealth": 100,
+  "tertiaryHealth": 0,
+  "visibleRange": 5,
+  "visiblePlane": "ground",
+  "primaryWeapon": {
+    "name": {
+      "en": "Gun",
+      "ja": "ガン"
+    },
+    "type": "cannon",
+    "land": {
+      "targetable": true,
+      "range": 4
+    },
+    "air": {
+      "targetable": false,
+      "range": 0
+    },
+    "underSea": {
+      "targetable": false,
+      "range": 0
+    },
+    "onSea": {
+      "targetable": true,
+      "range": 4
+    },
+    "damage": {
+      "default": 1,
+      "max": 3,
+      "min": 1,
+      "effectiveness": {
+        "infantry": 40,
+        "trackedVehicle": 100,
+        "wheeledVehicle": 100,
+        "flyingVehicle": 0,
+        "seaVehicle": 70,
+        "building": 100
+      }
+    },
+    "rate": 3
+  },
+  "secondaryWeapon": null,
+  "tertiaryWeapon": null,
+  "cost": {
+    "build": 100
+  }
+}

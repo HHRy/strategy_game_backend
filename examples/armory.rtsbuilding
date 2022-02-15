@@ -1,0 +1,25 @@
+{
+  "name": {
+    "en": "Armoury",
+    "ja": "兵器廠"
+  },
+  "version": 1,
+  "faction": "default",
+  "primaryHealth": 10000,
+  "secondaryHealth": 200,
+  "tertiaryHealth": 0,
+  "techLevel": 0,
+  "minTechLevel": 0,
+  "type": "building",
+  "subType": "armoury",
+  "produces": [
+    "trackedVehicle_tank"
+  ],
+  "productionWorkers": 1,
+  "queueType": "perKind",
+  "size": [ 3, 3 ],
+  "spacing": [ 1, 1, 1, 1 ],
+  "cost": {
+    "build": 1000
+  }
+}
