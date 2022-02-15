@@ -7,7 +7,7 @@ module StrategyGameBackend
 
       # Used to initialize an object with a location.
       def set_current_position(x, y)
-        move(x, y, true)
+        move(x, y, force_move: true)
       end
 
       # Returns the current position of the movable thing as an array of [x, y].
@@ -23,7 +23,7 @@ module StrategyGameBackend
       #
       # The default implementation is effectively teleporting, which is not ideal.
       def move(x, y, force_move: false)
-        raise StrategyGameBackend::Behaviours::Movable::Error, "Cannot move to #{x}, #{y}" if force_move || can_move_to?(x, y)
+        raise StrategyGameBackend::Behaviours::Movable::Error, "Cannot move to #{x}, #{y}" if force_move == false && !can_move_to?(x, y)
 
         @x = x
         @y = y
