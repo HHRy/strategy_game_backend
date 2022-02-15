@@ -6,3 +6,4 @@ module StrategyGameBackend
 end
 
 require_relative 'behaviours/destructable'
+require_relative 'behaviours/movable'
