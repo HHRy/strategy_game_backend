@@ -34,7 +34,7 @@ module StrategyGameBackend
       def take_damage(amount)
         if @primary_health.nil?
           raise StrategyGameBackend::Behaviours::Destructable::Error,
-                "#{self.class.name} has not had its health called. Missing set_initial_health ?"
+                "#{self.class.name} has not had its health set. Missing set_initial_health call?"
         end
 
         @tertiary_health -= amount
@@ -46,7 +46,7 @@ module StrategyGameBackend
       def destroyed?
         if @primary_health.nil?
           raise StrategyGameBackend::Behaviours::Destructable::Error,
-                "#{self.class.name} has not had its health called. Missing set_initial_health ?"
+                "#{self.class.name} has not had its health set. Missing set_initial_health call?"
         end
 
         @primary_health <= 0
@@ -58,7 +58,7 @@ module StrategyGameBackend
       def repairable?
         if @primary_health.nil?
           raise StrategyGameBackend::Behaviours::Destructable::Error,
-                "#{self.class.name} has not had its health called. Missing set_initial_health ?"
+                "#{self.class.name} has not had its health set. Missing set_initial_health call?"
         end
 
         @primary_health < @initial_primary_health
@@ -69,7 +69,7 @@ module StrategyGameBackend
       def repair(amount)
         if @primary_health.nil?
           raise StrategyGameBackend::Behaviours::Destructable::Error,
-                "#{self.class.name} has not had its health called. Missing set_initial_health ?"
+                "#{self.class.name} has not had its health set. Missing set_initial_health call?"
         end
 
         @primary_health += amount

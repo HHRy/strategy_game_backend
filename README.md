@@ -3,7 +3,8 @@
 [![CircleCI](https://circleci.com/gh/HHRy/strategy_game_backend/tree/main.svg?style=svg)](https://circleci.com/gh/HHRy/strategy_game_backend/tree/main)
 
 This is an as-yet un-named toy engine to allow you to play C&C style RTS
-games with bots or other players.
+games with bots or other players. It needs [simdjson][4] to work. On macOS
+you can get it using `brew install simdjson`.
 
 This part of the project focuses on maintaining game state, handling movement,
 and coordinating actions.
@@ -43,7 +44,8 @@ I'm making up the format for the Map as I go along, while I work out how to proc
 and represent it.
 
 Pathfinding is done using [Quentin18/pathfinding.rb][1] for now, and concurrent
-tasks are being handled by [ruby-concurrency/concurrent-ruby][2].
+tasks are being handled by [ruby-concurrency/concurrent-ruby][2]. JSON parsing
+is handled by [simdjson][4] and [anilmaurya/fast_jsonparser][3]
 
 Map coordinates assume that 0,0 is the top left. Although I guess that's immaterial
 since this isn't going to really render a map.
@@ -76,7 +78,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/HHRy/strategy_game_backend. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/strategy_game_backend/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/HHRy/strategy_game_backend. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/HHEy/strategy_game_backend/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -88,3 +90,5 @@ Everyone interacting in the StrategyGameBackend project's codebases, issue track
 
 [1]: https://github.com/Quentin18/pathfinding.rb
 [2]: https://github.com/ruby-concurrency/concurrent-ruby
+[3]: https://github.com/anilmaurya/fast_jsonparser
+[4]: https://github.com/simdjson/simdjson

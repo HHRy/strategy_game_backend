@@ -10,6 +10,69 @@ module StrategyGameBackend
       end
     end
 
+    class MapLoader
+      def initialize(map_file_path)
+        @file_path = map_file_path
+        @raw_map_data = FastJsonparser.load(File.expand_path(map_file_path))
+      end
+
+      def valid?
+        @valid ||= @raw_map_data[:version] == 1 && @raw_map_data[:format] = '2D'
+      end
+
+      def map_width
+        @raw_map_data[:width]
+      end
+
+      def map_height
+        @raw_map_data[:height]
+      end
+
+      def water
+        @water ||= (@raw_map_data[:waterAreas] || []).collect do |area|
+          StrategyGameBackend::Map::Area.new(area, map_width, map_height, :water)
+        end
+      end
+
+      def resource
+        @resource ||= (@raw_map_data[:resourceAreas] || []).collect do |area|
+          StrategyGameBackend::Map::Area.new(area, map_width, map_height, :resource)
+        end
+      end
+
+      def obstacle
+        @obstacle ||= (@raw_map_data[:obstacleAreas] || []).collect do |area|
+          StrategyGameBackend::Map::Area.new(area, map_width, map_height, :obstacle)
+        end
+      end
+
+      def terrain_at(x, y)
+        return :water if water.any? { |area| area.contains?(x, y) }
+        return :obstacle if obstacle.any? { |area| area.contains?(x, y) }
+        return :resource if resource.any? { |area| area.contains?(x, y) }
+
+        :land
+      end
+    end
+
+    class Area
+      def initialize(area_data, map_width, map_height, terrain)
+        @area_data = area_data
+        @map_width = map_width
+        @map_height = map_height
+        @terrain = terrain
+      end
+
+      def contains?(x, y)
+        start_x = @area_data[:x]
+        start_y = @area_data[:y]
+        end_x = start_x + @area_data[:width] - 1
+        end_y = start_y + @area_data[:height] - 1
+
+        x >= start_x && x <= end_x && y >= start_y && y <= end_y
+      end
+    end
+
     class Overall
       attr_reader :visible, :explored
 
@@ -19,6 +82,8 @@ module StrategyGameBackend
         @visible = Concurrent::Array.new
         @fow_timeout = 3
         @game = {}
+
+        @map_loader = StrategyGameBackend::Map::MapLoader.new('/Users/ryan/work/strategy_game_backend/examples/all_passable.rtsmap')
 
         # Check every FOW timeout period so we can determine if something is visible to
         # the player or not.
@@ -32,11 +97,11 @@ module StrategyGameBackend
       end
 
       def width
-        1920
+        @map_loader.map_width
       end
 
       def height
-        1080
+        @map_loader.map_height
       end
 
       def within?(x, y)
@@ -85,8 +150,8 @@ module StrategyGameBackend
         lookup_terrain_at(x, y) == :obstacle
       end
 
-      def lookup_terrain_at(_x, _y)
-        :land
+      def lookup_terrain_at(x, y)
+        @map_loader.terrain_at(x, y)
       end
 
       def state_at_coordinates(x, y)
