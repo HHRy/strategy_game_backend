@@ -124,6 +124,12 @@ module StrategyGameBackend
         @explored.push("#{x},#{y}")
       end
 
+      def move_unit_to(unit, x, y)
+        if traversable_by(x,y).include?(Unit.terrain_traversable(unit))
+          unit.register_move(x, y)
+        end
+      end
+
       # We only want to return actual traversable unit types when the terrain has
       # been explored by the player, so if it is not explored yet, we'll return
       # all options, and we will use the path finding when moving to determine where

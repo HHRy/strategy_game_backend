@@ -12,6 +12,8 @@ and coordinating actions.
 There will need to be a separate project that's a frontend to this to allow any
 games to be actually playable.
 
+There will probably also need to be a separate map builder tool.
+
 Planned supported features:
 
   - Different unit types (land, air, and sea)
