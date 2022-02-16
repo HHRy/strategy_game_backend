@@ -12,7 +12,6 @@ and coordinating actions.
 There will need to be a separate project that's a frontend to this to allow any
 games to be actually playable.
 
-There will probably also need to be a separate map builder tool.
 
 Planned supported features:
 
@@ -71,6 +70,13 @@ Combat will work as:
   - Enemy units within rage of a given unit will be fired upon
   - There won't be any splash damage just now
 
+## Related Projects
+
+There are other projects which make this whole thing more useful,
+they are:
+
+  - [The Map Editor][5] which will let users create and edit
+    `.rtsmap` files.
 
 ## Development
 
@@ -94,3 +100,4 @@ Everyone interacting in the StrategyGameBackend project's codebases, issue track
 [2]: https://github.com/ruby-concurrency/concurrent-ruby
 [3]: https://github.com/anilmaurya/fast_jsonparser
 [4]: https://github.com/simdjson/simdjson
+[5]: https://github.com/HHRy/strategy_engine_map_editor
